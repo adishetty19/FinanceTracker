@@ -1,0 +1,17 @@
+<div>
+    <h2>Budget Planning</h2>
+    <div class="mb-3">
+        <label class="form-label">Monthly Budget (in INR):</label>
+        <input type="number" class="form-control" [(ngModel)]="monthlyBudget" name="monthlyBudget" required>
+    </div>
+    <div class="mb-3">
+        <p>Total expenses this month: {{ totalExpenses | currency:'INR' }}</p>
+        <p>Budget used: {{ getBudgetUsagePercentage() | number:'1.0-0' }}%</p>
+    </div>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="getBudgetUsagePercentage()" aria-valuemin="0" aria-valuemax="100" [style.width.%]="getBudgetUsagePercentage()">
+            {{ getBudgetUsagePercentage() | number:'1.0-0' }}%
+        </div>
+    </div>
+</div>
+  

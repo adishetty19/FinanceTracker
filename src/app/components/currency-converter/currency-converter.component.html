@@ -1,0 +1,22 @@
+<div>
+    <h2>Currency Converter</h2>
+    <form (ngSubmit)="convertCurrency()" class="mb-3">
+        <div class="mb-3">
+            <label class="form-label">Amount in INR:</label>
+            <input type="number" class="form-control" [(ngModel)]="amount" name="amount" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Convert to:</label>
+            <select class="form-select" [(ngModel)]="targetCurrency" name="targetCurrency" required>
+                <option value="USD">US Dollar (USD)</option>
+                <option value="GBP">British Pound (GBP)</option>
+                <option value="EUR">Euro (EUR)</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="loading">Convert</button>
+    </form>
+    <div *ngIf="convertedAmount !== null">
+        <p>{{ amount }} INR = {{ convertedAmount | number:'1.2-2' }} {{ targetCurrency }}</p>
+    </div>
+</div>
+  

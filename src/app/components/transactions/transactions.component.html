@@ -1,0 +1,90 @@
+<h2>Transactions</h2>
+<div class="transaction-section mb-4">
+    <form (ngSubmit)="saveTransaction()" #txnForm="ngForm" class="mb-3">
+        <div class="row g-2">
+            <div class="col-md-2">
+                <input type="number" class="form-control" placeholder="Amount" [(ngModel)]="currentTransaction.amount" name="amount" required>
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control" [(ngModel)]="currentTransaction.date" name="date" required>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Description" [(ngModel)]="currentTransaction.description" name="description" required>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" [(ngModel)]="currentTransaction.category" name="category" required>
+                    <option value="" disabled>Select category</option>
+                    <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" [(ngModel)]="currentTransaction.type" name="type" required>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+            </div>
+        </div>
+        <div class="mt-2">
+            <button type="submit" class="btn btn-primary">{{ editMode ? 'Update' : 'Add' }} Transaction</button>
+            <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Reset</button>
+        </div>
+    </form>
+</div>
+
+<div class="filter-section mb-4">
+    <div class="mb-3">
+        <h4>Filter Transactions</h4>
+        <div class="row g-2">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Search description" [(ngModel)]="searchText" name="searchText" (ngModelChange)="applyFilter()">
+            </div>
+            <div class="col-md-4">
+                <input type="date" class="form-control" [(ngModel)]="searchDate" name="searchDate" (ngModelChange)="applyFilter()">
+            </div>
+            <div class="col-md-4">
+                <select class="form-select" [(ngModel)]="searchCategory" name="searchCategory" (ngModelChange)="applyFilter()">
+                    <option value="">All Categories</option>
+                    <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="transaction-list-section mb-4">
+    <div *ngIf="transactions && transactions.length > 0; else noTransactions">
+        <h4>Transactions List</h4>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let txn of filteredTransactions">
+                    <td (click)="selectAmount(txn.amount)" style="cursor: pointer;">
+                        {{ txn.amount | currency:'INR':'symbol':'1.0-0' }}
+                    </td>
+                    <td>{{ txn.date }}</td>
+                    <td>{{ txn.description }}</td>
+                    <td>{{ txn.category }}</td>
+                    <td>{{ txn.type }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning me-2" (click)="editTransaction(txn)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteTransaction(txn.id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-success" (click)="exportCSV()">Export CSV</button>
+    </div>
+</div>
+
+<ng-template #noTransactions>
+    <p>No transactions added yet.</p>
+</ng-template>

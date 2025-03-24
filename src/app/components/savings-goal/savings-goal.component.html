@@ -1,0 +1,17 @@
+<div>
+    <h2>Savings Goal Tracker</h2>
+    <div class="mb-3">
+        <label class="form-label">Savings Goal Amount (in INR):</label>
+        <input type="number" class="form-control" [(ngModel)]="goalAmount" name="goalAmount" required>
+    </div>
+    <div class="mb-3">
+        <p>Your current savings (from transactions): {{ currentSavings | currency:'INR' }}</p>
+        <p>Progress: {{ getProgressPercentage() | number:'1.0-0' }}%</p>
+    </div>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="getProgressPercentage()" aria-valuemin="0" aria-valuemax="100" [style.width.%]="getProgressPercentage()">
+            {{ getProgressPercentage() | number:'1.0-0' }}%
+        </div>
+    </div>
+</div>
+  

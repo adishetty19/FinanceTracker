@@ -1,0 +1,91 @@
+<div class="container">
+    <h2>Dashboard Analytics</h2>
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label for="startDate">Start Date</label>
+            <input id="startDate" type="date" class="form-control" [(ngModel)]="startDate" (change)="updateCharts()">
+        </div>
+        <div class="col-md-3">
+            <label for="endDate">End Date</label>
+            <input id="endDate" type="date" class="form-control" [(ngModel)]="endDate" (change)="updateCharts()">
+        </div>
+        <div class="col-md-3">
+            <label for="category">Category</label>
+            <select id="category" class="form-select" [(ngModel)]="selectedCategory" (change)="updateCharts()">
+                <option value="">All Categories</option>
+                <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+            </select>
+        </div>
+    </div>
+  
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Total Income</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ totalIncome | currency:'INR' }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Total Expenses</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ totalExpenses | currency:'INR' }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Net Savings</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ netSavings | currency:'INR' }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div *ngIf="monthlyBudget !== null" class="row mt-3">
+        <div class="col-md-6">
+            <h4>Budget Usage</h4>
+            <p>Monthly Budget: {{ monthlyBudget | currency:'INR' }}</p>
+            <p>Expenses: {{ budgetUsage | number:'1.0-0' }}%</p>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="budgetUsage" aria-valuemin="0" aria-valuemax="100" [style.width.%]="budgetUsage">
+                    {{ budgetUsage | number:'1.0-0' }}%
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div *ngIf="savingsGoalTarget !== null" class="row mt-3">
+        <div class="col-md-6">
+            <h4>Savings Goal Progress</h4>
+            <p>Savings Goal: {{ savingsGoalTarget | currency:'INR' }}</p>
+            <p>Current Savings: {{ netSavings | currency:'INR' }}</p>
+            <p>Achieved: {{ savingsGoalProgress | number:'1.0-0' }}%</p>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="savingsGoalProgress" aria-valuemin="0" aria-valuemax="100" [style.width.%]="savingsGoalProgress">
+                    {{ savingsGoalProgress | number:'1.0-0' }}%
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <h4>Cumulative Savings and 3-Month Moving Average</h4>
+            <canvas #savingsLineChart></canvas>
+        </div>
+        <div class="col-md-4">
+            <h4>Monthly Income vs. Expenses</h4>
+            <canvas #incomeExpenseBarChart></canvas>
+        </div>
+        <div class="col-md-4">
+            <h4>Expense Distribution by Category</h4>
+            <canvas #expensePieChart></canvas>
+        </div>
+    </div>
+</div>
+  

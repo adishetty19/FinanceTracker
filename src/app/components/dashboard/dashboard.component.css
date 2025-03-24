@@ -1,0 +1,14 @@
+.card {
+    margin-bottom: 20px;
+}
+  
+.progress {
+    height: 24px;
+    margin-top: 10px;
+}
+  
+canvas {
+    width: 100%;
+    max-height:300px;
+}
+  
