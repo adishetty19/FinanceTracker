@@ -1,7 +1,6 @@
 <div class="container">
     <h2>Investment ROI Calculator</h2>
-    
-    <p>Available Savings: {{ availableSavings | currency:'INR' }}</p>
+    <p>Available Savings: {{ availableSavings | currency:'INR':'symbol':'1.0-0' }}</p>
     
     <form (ngSubmit)="calculateInvestment()" #roiForm="ngForm">
         <div class="mb-3">
@@ -15,21 +14,27 @@
         <div class="mb-3">
             <label for="investmentType" class="form-label">Investment Type:</label>
             <select id="investmentType" class="form-select" [(ngModel)]="investmentType" name="investmentType" required>
-                <option value="Mutual Fund">Mutual Fund (approx. 12% p.a.)</option>
-                <option value="Fixed Deposit">Fixed Deposit (approx. 7% p.a.)</option>
+                <option value="Mutual Fund">Mutual Fund</option>
+                <option value="Fixed Deposit">Fixed Deposit</option>
+                <option value="Stock">Stock</option>
             </select>
+        </div>
+      
+        <div class="mb-3" *ngIf="investmentType === 'Stock'">
+            <label for="stockSymbol" class="form-label">Stock Symbol:</label>
+            <input type="text" id="stockSymbol" class="form-control" [(ngModel)]="stockSymbol" name="stockSymbol" required>
         </div>
       
         <div class="mb-3">
             <label for="numberOfYears" class="form-label">Number of Years:</label>
             <input type="number" id="numberOfYears" class="form-control" [(ngModel)]="numberOfYears" name="numberOfYears" required>
-      </div>
+        </div>
       
-      <button type="submit" class="btn btn-primary" [disabled]="initialAmount > availableSavings">Calculate ROI</button>
+        <button type="submit" class="btn btn-primary" [disabled]="initialAmount > availableSavings">Calculate ROI</button>
     </form>
     
     <div *ngIf="finalAmount !== null && roiPercentage !== null" class="mt-3">
-        <p>Final Amount after {{ numberOfYears }} years: {{ finalAmount | currency:'INR' }}</p>
+        <p>Final Amount after {{ numberOfYears }} years: {{ finalAmount | currency:'INR':'symbol':'1.0-0' }}</p>
         <p>ROI: {{ roiPercentage | number:'1.2-2' }}%</p>
     </div>
 </div>
