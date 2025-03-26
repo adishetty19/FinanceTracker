@@ -3,12 +3,13 @@ a.nav-link {
 }
 
 .navbar-nav .nav-link {
+    color: #fff;
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
   
 .navbar-nav .nav-link:hover {
     background-color: #007bff !important; 
-    color: #fff !important;
+    color: #000 !important;
     transform: scale(1.05);
 }
   
