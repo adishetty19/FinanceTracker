@@ -15,8 +15,17 @@
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="loading">Convert</button>
     </form>
-    <div *ngIf="convertedAmount !== null">
-        <p>{{ amount }} INR = {{ convertedAmount | number:'1.2-2' }} {{ targetCurrency }}</p>
+
+    <div *ngIf="loading" class="mt-2">
+        <p>Loading conversion rates...</p>
+    </div>
+
+    <div *ngIf="!loading && convertedAmount !== null" class="alert alert-info mt-3 conversion-result">
+        <h4 class="card-title">Conversion Result</h4>
+        <p>
+            <strong>{{ amount | currency:'INR':'symbol':'1.0-0' }}</strong> is approximately 
+            <strong>{{ convertedAmount | currency:targetCurrency:'symbol':'1.0-2' }}</strong>
+        </p>
     </div>
 </div>
   
