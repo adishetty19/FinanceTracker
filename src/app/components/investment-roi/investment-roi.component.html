@@ -4,7 +4,7 @@
     
     <form (ngSubmit)="calculateInvestment()" #roiForm="ngForm">
         <div class="mb-3">
-            <label for="initialAmount" class="form-label">Initial Investment Amount (INR):</label>
+            <label for="initialAmount" class="form-label">Initial Investment Amount (₹):</label>
             <input type="number" id="initialAmount" class="form-control" [(ngModel)]="initialAmount" name="initialAmount" required>
             <div *ngIf="initialAmount > availableSavings" class="text-danger mt-1">
                 Initial investment cannot exceed available savings.

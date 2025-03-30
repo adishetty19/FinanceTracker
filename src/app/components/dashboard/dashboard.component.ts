@@ -39,7 +39,6 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('incomeExpenseBarChart', { static: true }) incomeExpenseBarChart!: ElementRef<HTMLCanvasElement>;
   incomeExpenseChart!: Chart;
 
-  // Data for cumulative savings line chart (grouped by month).
   monthlySavings: { label: string; value: number }[] = [];
 
   private transactionsSub!: Subscription;
@@ -164,7 +163,7 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         labels: labels,
         datasets: [
           {
-            label: 'Cumulative Savings (INR)',
+            label: 'Cumulative Savings (₹)',
             data: dataPoints,
             fill: false,
             borderColor: 'rgba(54, 162, 235, 1)',
@@ -219,12 +218,12 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
         labels: months,
         datasets: [
           {
-            label: 'Income (INR)',
+            label: 'Income (₹)',
             data: incomeData,
             backgroundColor: 'rgba(54, 162, 235, 0.7)'
           },
           {
-            label: 'Expenses (INR)',
+            label: 'Expenses (₹)',
             data: expenseData,
             backgroundColor: 'rgba(255, 99, 132, 0.7)'
           }
