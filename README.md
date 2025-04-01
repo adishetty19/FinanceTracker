@@ -1,5 +1,10 @@
 # FinanceTracker
 
+A data-driven finance management app integrating real-time transaction tracking, predictive budgeting, and interactive savings analysis. Implemented ROI calculations, currency conversion via external APIs, and data visualization (spending trends, category breakdowns, and financial forecasts) using Chart.js
+Skills: Angular, Typescript, CSS, HTML, Bootstrap, Rest API
+
+Demo Link: http://finance-track-site.netlify.app
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
 
 ## Development server
